@@ -2,4 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/BBBankAPIs/.vs/BBBankAPIs/v16
+/BBBankAPIs/.vs
+/BBBankAPIs/bin/Debug/netcoreapp3.1
+/BusinessLogic/bin/Debug/netcoreapp3.1
+/BusinessLogic/obj
+/DataAccess/obj
+/Entities/bin/Debug/netcoreapp3.1
+/Entities/obj
