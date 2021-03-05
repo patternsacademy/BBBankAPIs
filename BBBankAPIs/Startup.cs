@@ -1,7 +1,10 @@
+using BusinessLogic;
+using DataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,15 @@ namespace BBBankAPIs
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<DbContext, BBBankContext>();
+            services.AddScoped<AccountRepository>();
+            services.AddScoped<AccountsService>();
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=BBBankDB2;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<BBBankContext>(
+      b => b.UseSqlServer(connection)
+              .UseLazyLoadingProxies(false)
+
+              );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

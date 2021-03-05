@@ -13,11 +13,15 @@ namespace BBBankAPIs.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        [Route("GetAll")]
-        public async Task<List<Account>> GetAll()
+        private readonly AccountsService _accountService;
+        public AccountsController(AccountsService accountService)
         {
-            var accountService = new AccountsService();
-            return accountService.GetAllAccounts();
+            _accountService = accountService;
+        }
+        [Route("GetAll")]
+        public async Task<ICollection<Account>> GetAll()
+        {
+            return await _accountService.GetAllAccounts();
         }
     }
 }

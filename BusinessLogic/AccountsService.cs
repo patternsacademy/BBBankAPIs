@@ -1,26 +1,22 @@
-﻿using Entities;
+﻿using DataAccess;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
     public class AccountsService
     {
-        public List<Account> GetAllAccounts()
+        private readonly AccountRepository _accountRepo;
+        public AccountsService(AccountRepository accountRepo)
         {
-            var accounts = new List<Account>();
-            accounts.Add(new Account()
-            {
-                AccountNumber = "1101",
-                AccountTitle = "John Doe"
-            });
-            accounts.Add(new Account()
-            {
-                AccountNumber = "1102",
-                AccountTitle = "Andrew Mike"
-            });
-            return accounts;
+            _accountRepo = accountRepo;
+        }
+        public async Task<ICollection<Account>> GetAllAccounts()
+        {
+            return await _accountRepo.GetAllAccounts();
         }
     }
 }
